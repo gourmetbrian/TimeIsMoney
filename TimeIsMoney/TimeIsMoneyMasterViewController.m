@@ -29,6 +29,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - button actions
 -(IBAction)doCountdown: (id)sender
 {
     if (isCountdownTimerPaused) {
@@ -47,6 +49,9 @@
 {
     [self pauseCountdownTimer];
 }
+
+
+#pragma mark Timer methods
 
 -(void)handleTimerTick
 {

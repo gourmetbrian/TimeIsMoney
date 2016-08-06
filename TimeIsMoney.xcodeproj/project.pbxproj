@@ -107,19 +107,12 @@
 		A923D3EA1D550B890070A47F /* TimeIsMoney */ = {
 			isa = PBXGroup;
 			children = (
+				A923D4291D56A0540070A47F /* Models */,
+				A923D4271D56A03B0070A47F /* ViewController */,
 				A923D3EE1D550B890070A47F /* AppDelegate.h */,
 				A923D3EF1D550B890070A47F /* AppDelegate.m */,
-				A923D3F11D550B890070A47F /* TimeIsMoneyMasterViewController.h */,
-				A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */,
 				A923D3F41D550B890070A47F /* Main.storyboard */,
-				A923D3F71D550B890070A47F /* Assets.xcassets */,
-				A923D3F91D550B890070A47F /* LaunchScreen.storyboard */,
-				A923D3FC1D550B890070A47F /* Info.plist */,
 				A923D3EB1D550B890070A47F /* Supporting Files */,
-				A923D41E1D550C310070A47F /* TimeIsMoneySettingsViewController.h */,
-				A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */,
-				A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */,
-				A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */,
 			);
 			path = TimeIsMoney;
 			sourceTree = "<group>";
@@ -127,6 +120,9 @@
 		A923D3EB1D550B890070A47F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A923D3F71D550B890070A47F /* Assets.xcassets */,
+				A923D3F91D550B890070A47F /* LaunchScreen.storyboard */,
+				A923D3FC1D550B890070A47F /* Info.plist */,
 				A923D3EC1D550B890070A47F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -148,6 +144,26 @@
 				A923D4121D550B890070A47F /* Info.plist */,
 			);
 			path = TimeIsMoneyUITests;
+			sourceTree = "<group>";
+		};
+		A923D4271D56A03B0070A47F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A923D3F11D550B890070A47F /* TimeIsMoneyMasterViewController.h */,
+				A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */,
+				A923D41E1D550C310070A47F /* TimeIsMoneySettingsViewController.h */,
+				A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		A923D4291D56A0540070A47F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */,
+				A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
