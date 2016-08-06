@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		A923D3ED1D550B890070A47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D3EC1D550B890070A47F /* main.m */; };
 		A923D3F01D550B890070A47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D3EF1D550B890070A47F /* AppDelegate.m */; };
-		A923D3F31D550B890070A47F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D3F21D550B890070A47F /* ViewController.m */; };
+		A923D3F31D550B890070A47F /* TimeIsMoneyMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */; };
 		A923D3F61D550B890070A47F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A923D3F41D550B890070A47F /* Main.storyboard */; };
 		A923D3F81D550B890070A47F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A923D3F71D550B890070A47F /* Assets.xcassets */; };
 		A923D3FB1D550B890070A47F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A923D3F91D550B890070A47F /* LaunchScreen.storyboard */; };
 		A923D4061D550B890070A47F /* TimeIsMoneyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4051D550B890070A47F /* TimeIsMoneyTests.m */; };
 		A923D4111D550B890070A47F /* TimeIsMoneyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4101D550B890070A47F /* TimeIsMoneyUITests.m */; };
+		A923D4201D550C310070A47F /* TimeIsMoneySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */; };
+		A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +41,8 @@
 		A923D3EC1D550B890070A47F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A923D3EE1D550B890070A47F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A923D3EF1D550B890070A47F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A923D3F11D550B890070A47F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A923D3F21D550B890070A47F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A923D3F11D550B890070A47F /* TimeIsMoneyMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneyMasterViewController.h; sourceTree = "<group>"; };
+		A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyMasterViewController.m; sourceTree = "<group>"; };
 		A923D3F51D550B890070A47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A923D3F71D550B890070A47F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A923D3FA1D550B890070A47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,10 @@
 		A923D40C1D550B890070A47F /* TimeIsMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeIsMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A923D4101D550B890070A47F /* TimeIsMoneyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyUITests.m; sourceTree = "<group>"; };
 		A923D4121D550B890070A47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A923D41E1D550C310070A47F /* TimeIsMoneySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneySettingsViewController.h; sourceTree = "<group>"; };
+		A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneySettingsViewController.m; sourceTree = "<group>"; };
+		A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneySettingsModel.h; sourceTree = "<group>"; };
+		A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneySettingsModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +109,17 @@
 			children = (
 				A923D3EE1D550B890070A47F /* AppDelegate.h */,
 				A923D3EF1D550B890070A47F /* AppDelegate.m */,
-				A923D3F11D550B890070A47F /* ViewController.h */,
-				A923D3F21D550B890070A47F /* ViewController.m */,
+				A923D3F11D550B890070A47F /* TimeIsMoneyMasterViewController.h */,
+				A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */,
 				A923D3F41D550B890070A47F /* Main.storyboard */,
 				A923D3F71D550B890070A47F /* Assets.xcassets */,
 				A923D3F91D550B890070A47F /* LaunchScreen.storyboard */,
 				A923D3FC1D550B890070A47F /* Info.plist */,
 				A923D3EB1D550B890070A47F /* Supporting Files */,
+				A923D41E1D550C310070A47F /* TimeIsMoneySettingsViewController.h */,
+				A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */,
+				A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */,
+				A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */,
 			);
 			path = TimeIsMoney;
 			sourceTree = "<group>";
@@ -202,6 +212,7 @@
 		A923D3E01D550B890070A47F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TimeIsMoney;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Brian Lane";
 				TargetAttributes = {
@@ -270,7 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A923D3F31D550B890070A47F /* ViewController.m in Sources */,
+				A923D3F31D550B890070A47F /* TimeIsMoneyMasterViewController.m in Sources */,
+				A923D4201D550C310070A47F /* TimeIsMoneySettingsViewController.m in Sources */,
+				A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */,
 				A923D3F01D550B890070A47F /* AppDelegate.m in Sources */,
 				A923D3ED1D550B890070A47F /* main.m in Sources */,
 			);
