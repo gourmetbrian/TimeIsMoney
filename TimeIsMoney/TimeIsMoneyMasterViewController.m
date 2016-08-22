@@ -17,10 +17,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //TODO change this to grab time from settings
-    self.timeLabel.text = @"25:00";
     isCountdownTimerPaused = NO;
+    
+    _delegate = [UIApplication sharedApplication].delegate;
+    _delegate.settings = [[TimeIsMoneySettingsModel alloc] init];
+    NSLog(@"MainViewController viewDidLoad: %i", _delegate.settings.userWorkTime);
+    remainingTicks = _delegate.settings.userWorkTime;
+    [self updateLabel];
+
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    remainingTicks = _delegate.settings.userWorkTime;
+    [self updateLabel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,7 +82,7 @@
         return;
     
     
-    remainingTicks = 1500;
+//    remainingTicks = 1500;
     [self updateLabel];
     
     countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0

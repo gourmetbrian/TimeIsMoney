@@ -10,4 +10,12 @@
 
 @interface TimeIsMoneySettingsModel : NSObject
 
+@property (nonatomic) int userWorkTime;
+@property (nonatomic) int userBreakTime;
+@property (nonatomic) BOOL useLongBreak;
+@property (nonatomic) BOOL tickSoundOn;
+
+- (void) setUserWorkTime: (int) newWorkTime;
+
+
 @end

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "TimeIsMoneySettingsModel.h"
+#import "AppDelegate.h"
 
 @interface TimeIsMoneyMasterViewController : UIViewController
 {
@@ -17,13 +16,14 @@
     int remainingTicks;
     int pauseTime;
     BOOL isCountdownTimerPaused;
+    AppDelegate;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
-@property (weak, nonatomic) TimeIsMoneySettingsModel *settings;
+@property (weak, nonatomic) AppDelegate *delegate;
 
 -(IBAction)doCountdown: (id) sender;
 

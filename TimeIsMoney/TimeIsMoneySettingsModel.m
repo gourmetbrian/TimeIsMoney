@@ -10,4 +10,27 @@
 
 @implementation TimeIsMoneySettingsModel
 
+@synthesize userWorkTime;
+@synthesize userBreakTime;
+@synthesize useLongBreak;
+@synthesize tickSoundOn;
+
+-(id) init
+{
+    self = [super init];
+
+    if(self) {
+    userWorkTime = 1500;
+    userBreakTime = 300;
+    useLongBreak = YES;
+    tickSoundOn = YES;
+    }
+    return self;
+}
+
+- (void) setUserWorkTime: (int) newWorkTime
+{
+    userWorkTime = newWorkTime * 60;
+}
+
 @end
