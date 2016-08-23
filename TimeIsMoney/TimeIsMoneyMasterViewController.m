@@ -93,7 +93,8 @@
 {
     [countdownTimer invalidate];
     countdownTimer = nil;
-    self.timeLabel.text = @"25:00";
+    remainingTicks = _delegate.settings.userWorkTime;
+    [self updateLabel];
     isCountdownTimerPaused = NO;
 }
 
@@ -108,22 +109,32 @@
 -(void) resumeCountdownTimer
 {
     isCountdownTimerPaused = NO;
-    if (countdownTimer)
-        return;
-    
-    
     remainingTicks = pauseTime;
-    [self updateLabel];
-    
-    countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
-                                                      target: self selector: @selector(handleTimerTick) userInfo: nil repeats: YES];
+    [self startCountdownTimer];
+//    if (countdownTimer)
+//        return;
+//    
+//    
+//    remainingTicks = pauseTime;
+//    [self updateLabel];
+//    
+//    countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
+//                                                      target: self selector: @selector(handleTimerTick) userInfo: nil repeats: YES];
 }
 
 -(void)updateLabel
 {
     int seconds = remainingTicks % 60;
-    int minutes = (remainingTicks / 60) % 60;
+    int minutes = (remainingTicks / 60);
+    if (minutes > 99) {
+        self.timeLabel.text = [NSString stringWithFormat:@"%3d:%02d", minutes, seconds];
+ 
+    } else if (minutes >= 10) {
     self.timeLabel.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
+    } else {
+        self.timeLabel.text = [NSString stringWithFormat:@"0%1d:%02d", minutes, seconds];
+
+    }
 }
 
 

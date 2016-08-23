@@ -16,9 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    delegate.settings = [[TimeIsMoneySettingsModel alloc] init];
-    // Do any additional setup after loading the view.
+    _delegate = [UIApplication sharedApplication].delegate;
+    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", _delegate.settings.userWorkTime/60];
+    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", _delegate.settings.userBreakTime/60];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,15 +46,14 @@
 
 -(void) updateWorkTimeSettings
 {
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
-    NSLog(@"Second View Controller ViewWillDisappear: %i", delegate.settings.userWorkTime);
+    [_delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
 }
 
 -(void) updateBreakTimeSettings
 {
-    
+    [_delegate.settings setUserBreakTime:[self.breakTimeLabel.text intValue]];
 }
+
 -(void) updateTickSoundOnSettings
 {
     

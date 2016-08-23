@@ -56,12 +56,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeIsMoney/TimeIsMoneySettingsViewController.m"
-            timestampString = "492547039.001562"
+            timestampString = "493669826.050072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
             endingLineNumber = "27"
             landmarkName = "-didReceiveMemoryWarning"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeIsMoney/TimeIsMoneyMasterViewController.m"
+            timestampString = "493669554.148461"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "-updateLabel"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

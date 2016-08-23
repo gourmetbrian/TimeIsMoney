@@ -33,4 +33,19 @@
     userWorkTime = newWorkTime * 60;
 }
 
+- (void) setUserBreakTime: (int) newBreakTime
+{
+    userBreakTime = newBreakTime * 60;
+}
+- (void) setUseLongBreak:(BOOL)useLongBreak
+{
+    userBreakTime;
+}
+- (void) setTickSoundOn:(BOOL)tickSoundOn
+{
+    
+}
+
+
+
 @end
