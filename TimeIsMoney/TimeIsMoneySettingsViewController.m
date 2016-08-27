@@ -16,9 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _delegate = [UIApplication sharedApplication].delegate;
-    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", _delegate.settings.userWorkTime/60];
-    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", _delegate.settings.userBreakTime/60];
+    self.delegate = [UIApplication sharedApplication].delegate;
+//    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", self.delegate.settings.userWorkTime/60];
+    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", 25];
+    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", self.delegate.settings.userBreakTime/60];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,12 +47,12 @@
 
 -(void) updateWorkTimeSettings
 {
-    [_delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
+    [self.delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
 }
 
 -(void) updateBreakTimeSettings
 {
-    [_delegate.settings setUserBreakTime:[self.breakTimeLabel.text intValue]];
+    [self.delegate.settings setUserBreakTime:[self.breakTimeLabel.text intValue]];
 }
 
 -(void) updateTickSoundOnSettings

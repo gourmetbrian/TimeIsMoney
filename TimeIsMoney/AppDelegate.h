@@ -13,6 +13,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) TimeIsMoneySettingsModel* settings;
+@property (nonatomic) NSMutableArray *completedTomatoes;
+@property (nonatomic) NSString *task;
+
 
 
 @end

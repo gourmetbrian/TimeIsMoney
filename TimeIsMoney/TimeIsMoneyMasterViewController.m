@@ -17,21 +17,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    isCountdownTimerPaused = NO;
-    
-    _delegate = [UIApplication sharedApplication].delegate;
-    _delegate.settings = [[TimeIsMoneySettingsModel alloc] init];
-    NSLog(@"MainViewController viewDidLoad: %i", _delegate.settings.userWorkTime);
-    remainingTicks = _delegate.settings.userWorkTime;
+    timerState = STOPPED;
+    previousState = STOPPED;
+    self.delegate = [UIApplication sharedApplication].delegate;
+    self.delegate.settings = [[TimeIsMoneySettingsModel alloc] init];
+    remainingTicks = self.delegate.settings.userWorkTime;
     [self updateLabel];
-
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    remainingTicks = _delegate.settings.userWorkTime;
+    if (timerState != RUNNING_TASK && timerState != RUNNING_BREAK) {
+    remainingTicks = self.delegate.settings.userWorkTime;
+    }
     [self updateLabel];
 }
 
@@ -45,7 +45,8 @@
 #pragma mark - button actions
 -(IBAction)doCountdown: (id)sender
 {
-    if (isCountdownTimerPaused) {
+    if (timerState == PAUSED) {
+;
         [self resumeCountdownTimer];
     } else {
         [self startCountdownTimer];
@@ -73,16 +74,31 @@
     if (remainingTicks <= 0) {
         [countdownTimer invalidate];
         countdownTimer = nil;
+        if (timerState == RUNNING_TASK) {
+            [self transitionToBreak];
+        } else if (timerState == RUNNING_BREAK) {
+            [self transitionFromBreak];
+        };
     }
 }
 
 - (void) startCountdownTimer
 {
+    
     if (countdownTimer)
         return;
-    
-    
-//    remainingTicks = 1500;
+    switch (timerState)
+    {
+        case RUNNING_TASK:
+            [self setTimerState:RUNNING_BREAK];
+            break;
+        case STOPPED:
+        case PAUSED:
+            [self setTimerState:RUNNING_TASK];
+            break;
+        case RUNNING_BREAK:
+            break;
+    }
     [self updateLabel];
     
     countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
@@ -93,33 +109,23 @@
 {
     [countdownTimer invalidate];
     countdownTimer = nil;
-    remainingTicks = _delegate.settings.userWorkTime;
+    remainingTicks = self.delegate.settings.userWorkTime;
     [self updateLabel];
-    isCountdownTimerPaused = NO;
+    [self setTimerState:STOPPED];
 }
 
 - (void) pauseCountdownTimer
 {
     pauseTime = remainingTicks;
-    isCountdownTimerPaused = YES;
     [countdownTimer invalidate];
     countdownTimer = nil;
+    [self setTimerState:PAUSED];
 }
 
 -(void) resumeCountdownTimer
 {
-    isCountdownTimerPaused = NO;
     remainingTicks = pauseTime;
     [self startCountdownTimer];
-//    if (countdownTimer)
-//        return;
-//    
-//    
-//    remainingTicks = pauseTime;
-//    [self updateLabel];
-//    
-//    countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
-//                                                      target: self selector: @selector(handleTimerTick) userInfo: nil repeats: YES];
 }
 
 -(void)updateLabel
@@ -130,11 +136,84 @@
         self.timeLabel.text = [NSString stringWithFormat:@"%3d:%02d", minutes, seconds];
  
     } else if (minutes >= 10) {
-    self.timeLabel.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
+        [self.timeLabel setText:([NSString stringWithFormat:@"%2d:%02d", minutes, seconds])];
     } else {
-        self.timeLabel.text = [NSString stringWithFormat:@"0%1d:%02d", minutes, seconds];
-
+        [self.timeLabel setText:([NSString stringWithFormat:@"0%1d:%02d", minutes, seconds])];
     }
+}
+
+-(void) setTimerState:(TimerState) newState
+{
+    previousState = timerState;
+    timerState = newState;
+    NSLog(@"current state is %u and previous state is %u", timerState, previousState);
+}
+
+-(void) promptUserForTaskEntry
+{
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"You finished"
+                                  message:@"Enter Your Completed Work"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             //self.delegate.task = alert.textFields.firstObject.text;
+                             NSString *timeStamp = [self generateTimeStamp];
+                             self.delegate.task = [NSString stringWithFormat:@"%@: %@", timeStamp, alert.textFields.firstObject.text];
+                             [self.delegate.completedTomatoes addObject:self.delegate.task];
+                             for (NSString *yourVar in self.delegate.completedTomatoes) {
+                                 
+                                 NSLog (@"Your Array elements are = %@", yourVar);
+                                 
+                             }
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             [self startCountdownTimer];
+                              
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"What did you work on?"; //for passwords
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void) transitionToBreak
+{
+    remainingTicks = self.delegate.settings.userBreakTime;
+    [self promptUserForTaskEntry];
+    [self setTimerState:RUNNING_BREAK];
+}
+
+-(void) transitionFromBreak
+{
+    remainingTicks = self.delegate.settings.userWorkTime;
+    [self updateLabel];
+    [self setTimerState:STOPPED];
+}
+
+-(NSString *) generateTimeStamp
+{
+    NSDate *now = [[NSDate alloc]init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
+
+    NSString *timeStamp = [formatter stringFromDate:now];
+    return timeStamp;
 }
 
 

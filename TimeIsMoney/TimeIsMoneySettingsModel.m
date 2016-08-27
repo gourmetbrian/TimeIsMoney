@@ -20,8 +20,12 @@
     self = [super init];
 
     if(self) {
-    userWorkTime = 1500;
-    userBreakTime = 300;
+    //commented out for debugging
+    //userWorkTime = 1500;
+    userWorkTime = 2;
+    //commented out for debugging
+    // userBreakTime = 300;
+    userBreakTime = 2;
     useLongBreak = YES;
     tickSoundOn = YES;
     }

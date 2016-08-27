@@ -9,14 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
+typedef enum timerState
+{
+    STOPPED,
+    PAUSED,
+    RUNNING_TASK,
+    RUNNING_BREAK,
+} TimerState;
+
 @interface TimeIsMoneyMasterViewController : UIViewController
 {
+    TimerState previousState;
+    TimerState timerState;
     @private
     NSTimer *countdownTimer;
     int remainingTicks;
     int pauseTime;
-    BOOL isCountdownTimerPaused;
-    AppDelegate;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -35,6 +43,11 @@
 -(void)handleTimerTick;
 
 -(void)updateLabel;
+
+-(void) setTimerState:(TimerState) newState;
+-(void) promptUserForTaskEntry;
+-(void) transitionToBreak;
+
 
 @end
 

@@ -17,6 +17,7 @@
 		A923D4111D550B890070A47F /* TimeIsMoneyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4101D550B890070A47F /* TimeIsMoneyUITests.m */; };
 		A923D4201D550C310070A47F /* TimeIsMoneySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */; };
 		A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */; };
+		A9563EF61D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneySettingsViewController.m; sourceTree = "<group>"; };
 		A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneySettingsModel.h; sourceTree = "<group>"; };
 		A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneySettingsModel.m; sourceTree = "<group>"; };
+		A9563EF41D6D104D006CFA40 /* TimeIsMoneyTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneyTaskViewController.h; sourceTree = "<group>"; };
+		A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 				A923D3F21D550B890070A47F /* TimeIsMoneyMasterViewController.m */,
 				A923D41E1D550C310070A47F /* TimeIsMoneySettingsViewController.h */,
 				A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */,
+				A9563EF41D6D104D006CFA40 /* TimeIsMoneyTaskViewController.h */,
+				A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */,
 				A923D3F01D550B890070A47F /* AppDelegate.m in Sources */,
 				A923D3ED1D550B890070A47F /* main.m in Sources */,
+				A9563EF61D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +531,7 @@
 				A923D4171D550B890070A47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A923D4181D550B890070A47F /* Build configuration list for PBXNativeTarget "TimeIsMoneyTests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +540,7 @@
 				A923D41A1D550B890070A47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A923D41B1D550B890070A47F /* Build configuration list for PBXNativeTarget "TimeIsMoneyUITests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +549,7 @@
 				A923D41D1D550B890070A47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

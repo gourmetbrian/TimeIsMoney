@@ -19,10 +19,14 @@
 }
 
 @synthesize settings;
+@synthesize completedTomatoes;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    completedTomatoes = [[NSMutableArray alloc] init];
+    [completedTomatoes addObject:@"Hello"];
+
     return YES;
 }
 
