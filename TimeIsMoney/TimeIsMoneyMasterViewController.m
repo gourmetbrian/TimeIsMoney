@@ -7,6 +7,7 @@
 //
 
 #import "TimeIsMoneyMasterViewController.h"
+#import "AppDelegate.h"
 
 @interface TimeIsMoneyMasterViewController ()
 
@@ -19,9 +20,7 @@
     [super viewDidLoad];
     timerState = STOPPED;
     previousState = STOPPED;
-    self.delegate = [UIApplication sharedApplication].delegate;
-    self.delegate.settings = [[TimeIsMoneySettingsModel alloc] init];
-    remainingTicks = self.delegate.settings.userWorkTime;
+    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -30,7 +29,7 @@
 {
     [super viewWillAppear:YES];
     if (timerState != RUNNING_TASK && timerState != RUNNING_BREAK) {
-    remainingTicks = self.delegate.settings.userWorkTime;
+    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     }
     [self updateLabel];
 }
@@ -109,7 +108,7 @@
 {
     [countdownTimer invalidate];
     countdownTimer = nil;
-    remainingTicks = self.delegate.settings.userWorkTime;
+    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
 }
@@ -163,9 +162,9 @@
                          {
                              //self.delegate.task = alert.textFields.firstObject.text;
                              NSString *timeStamp = [self generateTimeStamp];
-                             self.delegate.task = [NSString stringWithFormat:@"%@: %@", timeStamp, alert.textFields.firstObject.text];
-                             [self.delegate.completedTomatoes addObject:self.delegate.task];
-                             for (NSString *yourVar in self.delegate.completedTomatoes) {
+                             [AppDelegate getAppDelegate].task = [NSString stringWithFormat:@"%@: %@", timeStamp, alert.textFields.firstObject.text];
+                             [[AppDelegate getAppDelegate].completedTomatoes addObject:[AppDelegate getAppDelegate].task];
+                             for (NSString *yourVar in [AppDelegate getAppDelegate].completedTomatoes) {
                                  
                                  NSLog (@"Your Array elements are = %@", yourVar);
                                  
@@ -194,14 +193,14 @@
 
 -(void) transitionToBreak
 {
-    remainingTicks = self.delegate.settings.userBreakTime;
+    remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
     [self promptUserForTaskEntry];
     [self setTimerState:RUNNING_BREAK];
 }
 
 -(void) transitionFromBreak
 {
-    remainingTicks = self.delegate.settings.userWorkTime;
+    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
 }
@@ -210,7 +209,7 @@
 {
     NSDate *now = [[NSDate alloc]init];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
+    [formatter setDateFormat:@"MM-DD-YYYY HH:mm"];
 
     NSString *timeStamp = [formatter stringFromDate:now];
     return timeStamp;

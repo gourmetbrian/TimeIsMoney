@@ -47,7 +47,8 @@
 
 -(void) updateWorkTimeSettings
 {
-    [self.delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
+    self.delegate.settings.userWorkTime = [self.workTimeLabel.text intValue];
+    //[self.delegate.settings setUserWorkTime:[self.workTimeLabel.text intValue]];
 }
 
 -(void) updateBreakTimeSettings

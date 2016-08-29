@@ -18,7 +18,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = [UIApplication sharedApplication].delegate;
-    self.greekLetters = @[@"poop", @"pee", @"fart", @"butts", @"tities", @"smellbutts", @"bigcrayp", @"stinks", @"stenchburger", @"ediblepoop", @"woof", @"diarrhea", @"a", @"b", @"c", @"3", @"V", @"H", @"t", @"re", @"pool"];
     
 }
 

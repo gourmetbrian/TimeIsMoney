@@ -14,9 +14,6 @@
 @end
 
 @implementation AppDelegate
-{
-    AppDelegate *theDelegate;
-}
 
 @synthesize settings;
 @synthesize completedTomatoes;
@@ -24,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    settings = [[TimeIsMoneySettingsModel alloc] init];
     completedTomatoes = [[NSMutableArray alloc] init];
     [completedTomatoes addObject:@"Hello"];
 
@@ -50,6 +48,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
++(AppDelegate *) getAppDelegate
+{
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
 

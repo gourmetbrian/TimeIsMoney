@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 typedef enum timerState
 {
@@ -31,7 +30,6 @@ typedef enum timerState
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
-@property (weak, nonatomic) AppDelegate *delegate;
 
 -(IBAction)doCountdown: (id) sender;
 

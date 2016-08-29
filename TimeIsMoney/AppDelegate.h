@@ -16,7 +16,7 @@
 @property (nonatomic) NSMutableArray *completedTomatoes;
 @property (nonatomic) NSString *task;
 
-
++(AppDelegate *) getAppDelegate;
 
 @end
 
