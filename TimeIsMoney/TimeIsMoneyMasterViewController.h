@@ -8,22 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum timerState
+typedef NS_ENUM(NSInteger, TimerState)
 {
     STOPPED,
     PAUSED,
     RUNNING_TASK,
     RUNNING_BREAK,
-} TimerState;
+};
 
 @interface TimeIsMoneyMasterViewController : UIViewController
 {
-    TimerState previousState;
-    TimerState timerState;
-    @private
-    NSTimer *countdownTimer;
-    int remainingTicks;
-    int pauseTime;
+//    TimerState previousState;
+//    TimerState timerState;
+//    @private
+//    NSTimer *countdownTimer;
+//    int remainingTicks;
+//    int pauseTime;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

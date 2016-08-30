@@ -14,12 +14,22 @@
 @end
 
 @implementation TimeIsMoneyMasterViewController
+{
+    TimerState previousState;
+    TimerState timerState;
+@private
+    NSTimer *countdownTimer;
+    int remainingTicks;
+    int pauseTime;
+    UIColor *pauseBackgroundColor;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     timerState = STOPPED;
     previousState = STOPPED;
+    pauseBackgroundColor = [UIColor colorWithRed:152/255.0 green:199/255.0 blue:255/255.0 alpha:1.0];
     remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     // Do any additional setup after loading the view, typically from a nib.
@@ -44,8 +54,9 @@
 #pragma mark - button actions
 -(IBAction)doCountdown: (id)sender
 {
+    if (countdownTimer)
+    return;
     if (timerState == PAUSED) {
-;
         [self resumeCountdownTimer];
     } else {
         [self startCountdownTimer];
@@ -54,11 +65,15 @@
 
 -(IBAction)resetCountdown:(id)sender
 {
+
     [self resetCountdownTimer];
 }
 
 -(IBAction)pauseCountdown:(id)sender
 {
+    if (!countdownTimer)
+        return;
+    NSLog(@"Test");
     [self pauseCountdownTimer];
 }
 
@@ -93,6 +108,8 @@
             break;
         case STOPPED:
         case PAUSED:
+            self.view.backgroundColor = [UIColor redColor];
+            [self.timeLabel setText:@"Break!"];
             [self setTimerState:RUNNING_TASK];
             break;
         case RUNNING_BREAK:
@@ -137,8 +154,9 @@
     } else if (minutes >= 10) {
         [self.timeLabel setText:([NSString stringWithFormat:@"%2d:%02d", minutes, seconds])];
     } else {
-        [self.timeLabel setText:([NSString stringWithFormat:@"0%1d:%02d", minutes, seconds])];
+       [self.timeLabel setText:([NSString stringWithFormat:@"0%1d:%02d", minutes, seconds])];
     }
+    
 }
 
 -(void) setTimerState:(TimerState) newState
@@ -160,15 +178,16 @@
                          style:UIAlertActionStyleDefault
                          handler:^(UIAlertAction * action)
                          {
-                             //self.delegate.task = alert.textFields.firstObject.text;
                              NSString *timeStamp = [self generateTimeStamp];
                              [AppDelegate getAppDelegate].task = [NSString stringWithFormat:@"%@: %@", timeStamp, alert.textFields.firstObject.text];
-                             [[AppDelegate getAppDelegate].completedTomatoes addObject:[AppDelegate getAppDelegate].task];
+                             [[AppDelegate getAppDelegate].completedTomatoes insertObject:[AppDelegate getAppDelegate].task atIndex:0];
                              for (NSString *yourVar in [AppDelegate getAppDelegate].completedTomatoes) {
                                  
                                  NSLog (@"Your Array elements are = %@", yourVar);
                                  
                              }
+                             [[AppDelegate getAppDelegate] saveSettings:[AppDelegate getAppDelegate].completedTomatoes];
+
                              [alert dismissViewControllerAnimated:YES completion:nil];
                              [self startCountdownTimer];
                               
@@ -179,6 +198,7 @@
                              handler:^(UIAlertAction * action)
                              {
                                  [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [self startCountdownTimer];
                                  
                              }];
     
@@ -186,7 +206,7 @@
     [alert addAction:ok];
     [alert addAction:cancel];
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"What did you work on?"; //for passwords
+        textField.placeholder = @"What did you work on?"; 
     }];
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -194,8 +214,10 @@
 -(void) transitionToBreak
 {
     remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
+    [self.timeLabel setText:@"Break!"];
     [self promptUserForTaskEntry];
     [self setTimerState:RUNNING_BREAK];
+    self.view.backgroundColor = pauseBackgroundColor;
 }
 
 -(void) transitionFromBreak
@@ -209,7 +231,7 @@
 {
     NSDate *now = [[NSDate alloc]init];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-DD-YYYY HH:mm"];
+    [formatter setDateFormat:@"MM-dd-YYYY HH:mm"];
 
     NSString *timeStamp = [formatter stringFromDate:now];
     return timeStamp;

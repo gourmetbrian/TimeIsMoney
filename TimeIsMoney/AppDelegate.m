@@ -21,9 +21,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.localDefaults = [NSUserDefaults standardUserDefaults];
+    self.savedUserTasks = @"SavedUserTasks";
     settings = [[TimeIsMoneySettingsModel alloc] init];
     completedTomatoes = [[NSMutableArray alloc] init];
-    [completedTomatoes addObject:@"Hello"];
+    [self.completedTomatoes addObjectsFromArray:[self getSettings]];
 
     return YES;
 }
@@ -54,6 +56,18 @@
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
+
+-(void)saveSettings:(NSMutableArray*) completedTasks
+{
+    [self.localDefaults setObject:completedTasks forKey:self.savedUserTasks];
+    [self.localDefaults synchronize];
+}
+
+-(NSMutableArray*)getSettings
+{
+    return (NSMutableArray*)[self.localDefaults objectForKey:self.savedUserTasks];
+}
+
 
 
 @end

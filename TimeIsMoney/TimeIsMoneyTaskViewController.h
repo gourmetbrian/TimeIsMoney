@@ -11,8 +11,6 @@
 
 @interface TimeIsMoneyTaskViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (copy, nonatomic) NSMutableArray *completedTomatoes;
-@property (weak, nonatomic) AppDelegate *delegate;
 
 
 

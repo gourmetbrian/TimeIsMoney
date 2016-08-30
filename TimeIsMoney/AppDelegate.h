@@ -15,8 +15,13 @@
 @property (strong, nonatomic) TimeIsMoneySettingsModel* settings;
 @property (nonatomic) NSMutableArray *completedTomatoes;
 @property (nonatomic) NSString *task;
+@property NSUserDefaults *localDefaults;
+@property NSString* savedUserTasks;
 
 +(AppDelegate *) getAppDelegate;
+
+-(void)saveSettings:(NSMutableArray*) completedTasks;
+-(NSMutableArray*)getSettings;
 
 @end
 

@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *breakTimeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *tickSoundOnSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *useLongBreakSwitch;
-@property (weak, nonatomic) AppDelegate *delegate;
 
 -(IBAction)Countdown: (id) sender;
 

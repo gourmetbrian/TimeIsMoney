@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.delegate = [UIApplication sharedApplication].delegate;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +26,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.delegate.completedTomatoes count];
+    return [[AppDelegate getAppDelegate].completedTomatoes count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -41,8 +39,8 @@
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:simpleIdentifier];
     }
-                
-    cell.textLabel.text = self.delegate.completedTomatoes[indexPath.row];
+
+    cell.textLabel.text = [AppDelegate getAppDelegate].completedTomatoes[indexPath.row];
     return cell;
 }
 /*
