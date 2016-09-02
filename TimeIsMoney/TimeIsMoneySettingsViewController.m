@@ -16,31 +16,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", self.delegate.settings.userWorkTime/60];
-    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", 25];
-    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", [AppDelegate getAppDelegate].settings.userBreakTime/60];
+    [self getSettingsAndUpdateView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self getSettingsAndUpdateView];
 }
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    [self updateWorkTimeSettings];
+    [self updateAllSettings];
     [super viewWillDisappear:YES];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - getSettingsAndUpdateView
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) getSettingsAndUpdateView
+{
+    //      Commented out for debugging
+    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", [AppDelegate getAppDelegate].settings.userWorkTime/60];
+    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", [AppDelegate getAppDelegate].settings.userBreakTime/60];
+//    self.workTimeLabel.text = [NSString stringWithFormat:@"%d", [AppDelegate getAppDelegate].settings.userWorkTime];
+//    self.breakTimeLabel.text = [NSString stringWithFormat:@"%d", [AppDelegate getAppDelegate].settings.userBreakTime];
+    if ([AppDelegate getAppDelegate].settings.tickSoundOn == YES){
+        [self.tickSoundOnSwitch setOn:YES];
+    } else {
+        [self.tickSoundOnSwitch setOn:NO];
+
+    }
+    if ([AppDelegate getAppDelegate].settings.useLongBreak == YES){
+        [self.useLongBreakSwitch setOn:YES];
+    } else {
+        [self.useLongBreakSwitch setOn:NO];
+        
+    }
 }
-*/
 
 #pragma mark - updateSettings
 
@@ -56,12 +67,30 @@
 
 -(void) updateTickSoundOnSettings
 {
-    
-}
--(void) updateUseLongBreakSettings
-{
-    
+    if ([self.tickSoundOnSwitch isOn]){
+        [AppDelegate getAppDelegate].settings.tickSoundOn = 1;
+    } else {
+//        [[AppDelegate getAppDelegate].settings toggleTickSoundOn];
+        [AppDelegate getAppDelegate].settings.tickSoundOn = 0;
+    };
+
 }
 
+-(void) updateUseLongBreakSettings
+{
+    if ([self.useLongBreakSwitch isOn]){
+        [AppDelegate getAppDelegate].settings.useLongBreak = 1;
+    } else {
+        [AppDelegate getAppDelegate].settings.useLongBreak = 0;
+    };
+}
+
+-(void) updateAllSettings
+{
+    [self updateWorkTimeSettings];
+    [self updateBreakTimeSettings];
+    [self updateTickSoundOnSettings];
+    [self updateUseLongBreakSettings];
+}
 
 @end

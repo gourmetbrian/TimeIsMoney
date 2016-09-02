@@ -16,12 +16,4 @@
 @property (weak, nonatomic) IBOutlet UISwitch *tickSoundOnSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *useLongBreakSwitch;
 
--(IBAction)Countdown: (id) sender;
-
--(void) updateWorkTimeSettings;
--(void) updateBreakTimeSettings;
--(void) updateTickSoundOnSettings;
--(void) updateUseLongBreakSettings;
-
-
 @end

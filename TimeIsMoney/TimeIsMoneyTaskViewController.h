@@ -11,9 +11,4 @@
 
 @interface TimeIsMoneyTaskViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-
-
-
-
-
 @end

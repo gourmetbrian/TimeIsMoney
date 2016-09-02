@@ -18,6 +18,8 @@
 		A923D4201D550C310070A47F /* TimeIsMoneySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D41F1D550C310070A47F /* TimeIsMoneySettingsViewController.m */; };
 		A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */; };
 		A9563EF61D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */; };
+		A9563EFA1D760486006CFA40 /* tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9563EF91D760486006CFA40 /* tick.mp3 */; };
+		A9563EFC1D7604E1006CFA40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9563EFB1D7604E1006CFA40 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneySettingsModel.m; sourceTree = "<group>"; };
 		A9563EF41D6D104D006CFA40 /* TimeIsMoneyTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneyTaskViewController.h; sourceTree = "<group>"; };
 		A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyTaskViewController.m; sourceTree = "<group>"; };
+		A9563EF91D760486006CFA40 /* tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tick.mp3; path = ../../../../../Desktop/tick.mp3; sourceTree = "<group>"; };
+		A9563EFB1D7604E1006CFA40 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9563EFC1D7604E1006CFA40 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,7 @@
 		A923D3DF1D550B890070A47F = {
 			isa = PBXGroup;
 			children = (
+				A9563EFB1D7604E1006CFA40 /* AVFoundation.framework */,
 				A923D3EA1D550B890070A47F /* TimeIsMoney */,
 				A923D4041D550B890070A47F /* TimeIsMoneyTests */,
 				A923D40F1D550B890070A47F /* TimeIsMoneyUITests */,
@@ -110,6 +116,7 @@
 		A923D3EA1D550B890070A47F /* TimeIsMoney */ = {
 			isa = PBXGroup;
 			children = (
+				A9563EF71D7603F5006CFA40 /* Resources */,
 				A923D4291D56A0540070A47F /* Models */,
 				A923D4271D56A03B0070A47F /* ViewController */,
 				A923D3EE1D550B890070A47F /* AppDelegate.h */,
@@ -169,6 +176,22 @@
 				A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		A9563EF71D7603F5006CFA40 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A9563EF81D7603FE006CFA40 /* Sounds */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A9563EF81D7603FE006CFA40 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A9563EF91D760486006CFA40 /* tick.mp3 */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A923D3FB1D550B890070A47F /* LaunchScreen.storyboard in Resources */,
+				A9563EFA1D760486006CFA40 /* tick.mp3 in Resources */,
 				A923D3F81D550B890070A47F /* Assets.xcassets in Resources */,
 				A923D3F61D550B890070A47F /* Main.storyboard in Resources */,
 			);

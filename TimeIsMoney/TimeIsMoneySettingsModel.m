@@ -10,7 +10,7 @@
 
 @implementation TimeIsMoneySettingsModel
 
-//@synthesize userWorkTime;
+@synthesize userWorkTime;
 @synthesize userBreakTime;
 @synthesize useLongBreak;
 @synthesize tickSoundOn;
@@ -21,11 +21,10 @@
 
     if(self) {
     //commented out for debugging
-    //userWorkTime = 1500;
-    _userWorkTime = 3;
-    //commented out for debugging
-    // userBreakTime = 300;
-    userBreakTime = 2;
+    //userWorkTime = 3;
+    // userBreakTime = 2;
+    userWorkTime = 1500;
+    userBreakTime = 300;
     useLongBreak = YES;
     tickSoundOn = YES;
     }
@@ -34,21 +33,14 @@
 
 - (void) setUserWorkTime: (int) newWorkTime
 {
-    _userWorkTime = newWorkTime * 60;
+    userWorkTime = newWorkTime * 60;
 }
 
 - (void) setUserBreakTime: (int) newBreakTime
 {
     userBreakTime = newBreakTime * 60;
 }
-- (void) setUseLongBreak:(BOOL)useLongBreak
-{
-    userBreakTime;
-}
-- (void) setTickSoundOn:(BOOL)tickSoundOn
-{
-    
-}
+
 
 
 

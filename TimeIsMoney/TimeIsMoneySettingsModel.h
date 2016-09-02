@@ -17,8 +17,6 @@
 
 - (void) setUserWorkTime: (int) newWorkTime;
 - (void) setUserBreakTime: (int) newBreakTime;
-- (void) setUseLongBreak:(BOOL)useLongBreak;
-- (void) setTickSoundOn:(BOOL)tickSoundOn;
 
 
 @end
