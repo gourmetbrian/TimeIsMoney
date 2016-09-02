@@ -9,39 +9,49 @@
 #import <AVFoundation/AVFoundation.h>
 #import "TimeIsMoneyMasterViewController.h"
 #import "AppDelegate.h"
+#import "OALSimpleAudio.h"
+
 
 
 @interface TimeIsMoneyMasterViewController ()
+
+@property (nonatomic) int remainingTicks;
+@property (nonatomic) int pauseTime;
+@property (nonatomic) int consecutiveSessionsCount;
+
+@property (nonatomic, strong) UIColor* pauseBackgroundColor;
+
+@property (nonatomic) TimerState previousState;
+@property (nonatomic) TimerState timerState;
+@property (nonatomic) NSTimer *countdownTimer;
 
 @end
 
 @implementation TimeIsMoneyMasterViewController
 {
-    TimerState previousState;
-    TimerState timerState;
-    NSTimer *countdownTimer;
-    int remainingTicks;
-    int pauseTime;
-    UIColor *pauseBackgroundColor;
-    AVAudioPlayer *audioPlayer;
-    int consecutiveSessionsCount;
+
+
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initAudioPlayer];
-    pauseBackgroundColor = [UIColor colorWithRed:152/255.0 green:199/255.0 blue:255/255.0 alpha:1.0];
+    self.pauseBackgroundColor = [UIColor colorWithRed:152/255.0 green:199/255.0 blue:255/255.0 alpha:1.0];
+    [self setTimerState:STOPPED];
+    self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"tick.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"alarm.mp3"];
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    if (timerState != RUNNING_TASK && timerState != RUNNING_BREAK) {
-    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
+    if (_timerState != RUNNING_TASK && _timerState != RUNNING_BREAK) {
+    _remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     }
     [self updateLabel];
 }
@@ -58,9 +68,9 @@
 {
     self = [super init];
     if (self)   {
-        timerState = STOPPED;
-        previousState = STOPPED;
-        remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
+        self.timerState = STOPPED;
+        self.previousState = self.timerState;
+        self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     }
     return self;
 }
@@ -69,9 +79,9 @@
 #pragma mark - button actions
 -(IBAction)doCountdown: (id)sender
 {
-    if (countdownTimer)
+    if (self.countdownTimer)
     return;
-    if (timerState == PAUSED) {
+    if (self.timerState == PAUSED) {
         [self resumeCountdownTimer];
     } else {
         [self startCountdownTimer];
@@ -86,7 +96,7 @@
 
 -(IBAction)pauseCountdown:(id)sender
 {
-    if (!countdownTimer)
+    if (!self.countdownTimer)
         return;
     [self pauseCountdownTimer];
 }
@@ -96,15 +106,16 @@
 
 -(void)handleTimerTick
 {
-    remainingTicks--;
+    _remainingTicks--;
     [self updateLabel];
     
-    if (remainingTicks <= 0) {
-        [countdownTimer invalidate];
-        countdownTimer = nil;
-        if (timerState == RUNNING_TASK) {
+    if (_remainingTicks <= 0) {
+        [_countdownTimer invalidate];
+        _countdownTimer = nil;
+        if (_timerState == RUNNING_TASK) {
+            [[OALSimpleAudio sharedInstance] playEffect:@"alarm.mp3"];
             [self transitionToBreak];
-        } else if (timerState == RUNNING_BREAK) {
+        } else if (_timerState == RUNNING_BREAK) {
             [self transitionFromBreak];
         };
     }
@@ -113,9 +124,9 @@
 - (void) startCountdownTimer
 {
     
-    if (countdownTimer)
+    if (self.countdownTimer)
         return;
-    switch (timerState)
+    switch (self.timerState)
     {
         case RUNNING_TASK:
             [self setTimerState:RUNNING_BREAK];
@@ -131,39 +142,39 @@
     }
     [self updateLabel];
     
-    countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
+    self.countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                                       target: self selector: @selector(handleTimerTick) userInfo: nil repeats: YES];
 }
 
 - (void) resetCountdownTimer
 {
-    [countdownTimer invalidate];
-    countdownTimer = nil;
-    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
+    [self.countdownTimer invalidate];
+    self.countdownTimer = nil;
+    self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
-    self.view.backgroundColor = pauseBackgroundColor;
+    self.view.backgroundColor = self.pauseBackgroundColor;
 }
 
 - (void) pauseCountdownTimer
 {
-    pauseTime = remainingTicks;
-    [countdownTimer invalidate];
-    countdownTimer = nil;
+    self.pauseTime = self.remainingTicks;
+    [self.countdownTimer invalidate];
+    self.countdownTimer = nil;
     [self setTimerState:PAUSED];
 }
 
 -(void) resumeCountdownTimer
 {
-    remainingTicks = pauseTime;
+    self.remainingTicks = self.pauseTime;
     [self startCountdownTimer];
 }
 
 -(void)updateLabel
 {
     
-    int seconds = remainingTicks % 60;
-    int minutes = (remainingTicks / 60);
+    int seconds = self.remainingTicks % 60;
+    int minutes = (self.remainingTicks / 60);
     if (minutes > 99) {
         self.timeLabel.text = [NSString stringWithFormat:@"%3d:%02d", minutes, seconds];
  
@@ -172,9 +183,9 @@
     } else {
        [self.timeLabel setText:([NSString stringWithFormat:@"0%1d:%02d", minutes, seconds])];
     }
-    if ([AppDelegate getAppDelegate].settings.tickSoundOn == YES && timerState == RUNNING_TASK)
+    if ([AppDelegate getAppDelegate].settings.tickSoundOn == YES && self.timerState == RUNNING_TASK)
     {
-        [audioPlayer play];
+        [[OALSimpleAudio sharedInstance] playEffect:@"tick.mp3"];
     }
     
 }
@@ -182,8 +193,8 @@
 #pragma mark - State functions
 -(void) setTimerState:(TimerState) newState
 {
-    previousState = timerState;
-    timerState = newState;
+   if (_timerState) _previousState = _timerState;
+    _timerState = newState;
 }
 
 -(void) promptUserForTaskEntry
@@ -232,30 +243,30 @@
     if ([AppDelegate getAppDelegate].settings.useLongBreak)
     /* Using long break, we count the number of consecutive sessions */
     {
-        if (consecutiveSessionsCount <2) {
-            remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
-            consecutiveSessionsCount++;
+        if (self.consecutiveSessionsCount <2) {
+            self.remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
+            self.consecutiveSessionsCount++;
         } else {
-            remainingTicks = 600;
-            consecutiveSessionsCount = 0;
+            self.remainingTicks = 600;
+           self.consecutiveSessionsCount = 0;
         }
     } else {
         /*not using long break, reset consecutive sessions count and proceed w/ user determined break*/
-        remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
-        consecutiveSessionsCount = 0;
+        self.remainingTicks = [AppDelegate getAppDelegate].settings.userBreakTime;
+        self.consecutiveSessionsCount = 0;
     }
     [self.timeLabel setText:@"Break!"];
     [self promptUserForTaskEntry];
     [self setTimerState:RUNNING_BREAK];
-    self.view.backgroundColor = pauseBackgroundColor;
+    self.view.backgroundColor = self.pauseBackgroundColor;
 }
 
 -(void) transitionFromBreak
 {
-    remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
+    self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
-    self.view.backgroundColor = pauseBackgroundColor;
+    self.view.backgroundColor = self.pauseBackgroundColor;
 
 }
 
@@ -268,19 +279,5 @@
     NSString *timeStamp = [formatter stringFromDate:now];
     return timeStamp;
 }
-
-#pragma mark - Audio Methods
-
--(void) initAudioPlayer
-{
-    NSString *path = [NSString stringWithFormat:@"%@/tick.mp3", [[NSBundle mainBundle] resourcePath]];
-    NSURL *soundUrl = [NSURL fileURLWithPath:path];
-    
-    // Create audio player object and initialize with URL to sound
-    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-}
-
-
-
 
 @end

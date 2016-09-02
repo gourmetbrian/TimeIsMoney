@@ -21,10 +21,10 @@
 
     if(self) {
     //commented out for debugging
-    //userWorkTime = 3;
-    // userBreakTime = 2;
-    userWorkTime = 1500;
-    userBreakTime = 300;
+    userWorkTime = 3;
+     userBreakTime = 2;
+//    userWorkTime = 1500;
+//    userBreakTime = 300;
     useLongBreak = YES;
     tickSoundOn = YES;
     }
