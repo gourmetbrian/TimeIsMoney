@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TimeIsMoneyConstants.h"
 
 @interface AppDelegate ()
 
@@ -22,10 +23,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.localDefaults = [NSUserDefaults standardUserDefaults];
-    self.savedUserTasks = @"SavedUserTasks";
     settings = [[TimeIsMoneySettingsModel alloc] init];
     completedTomatoes = [[NSMutableArray alloc] init];
-    [self.completedTomatoes addObjectsFromArray:[self getSettings]];
+    [self.completedTomatoes addObjectsFromArray:[self getTasks]];
 
     return YES;
 }
@@ -57,15 +57,15 @@
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
--(void)saveSettings:(NSMutableArray*) completedTasks
+-(void)saveTasks:(NSMutableArray*) completedTasks
 {
-    [self.localDefaults setObject:completedTasks forKey:self.savedUserTasks];
+    [self.localDefaults setObject:completedTasks forKey:SavedUserTasksKey];
     [self.localDefaults synchronize];
 }
 
--(NSMutableArray*)getSettings
+-(NSMutableArray*)getTasks
 {
-    return (NSMutableArray*)[self.localDefaults objectForKey:self.savedUserTasks];
+    return (NSMutableArray*)[self.localDefaults objectForKey:SavedUserTasksKey];
 }
 
 

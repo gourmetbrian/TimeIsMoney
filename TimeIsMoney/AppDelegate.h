@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TimeIsMoneySettingsModel.h"
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -16,12 +17,11 @@
 @property (nonatomic) NSMutableArray *completedTomatoes;
 @property (nonatomic) NSString *task;
 @property NSUserDefaults *localDefaults;
-@property NSString* savedUserTasks;
 
 +(AppDelegate *) getAppDelegate;
 
--(void)saveSettings:(NSMutableArray*) completedTasks;
--(NSMutableArray*)getSettings;
+-(void)saveTasks:(NSMutableArray*) completedTasks;
+-(NSMutableArray*)getTasks;
 
 @end
 

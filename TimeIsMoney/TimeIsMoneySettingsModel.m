@@ -7,6 +7,8 @@
 //
 
 #import "TimeIsMoneySettingsModel.h"
+#import "TimeIsMoneyConstants.h"
+
 
 @implementation TimeIsMoneySettingsModel
 
@@ -22,9 +24,9 @@
     if(self) {
     //commented out for debugging
     userWorkTime = 3;
-     userBreakTime = 2;
-//    userWorkTime = 1500;
-//    userBreakTime = 300;
+//     userBreakTime = 2;
+//    userWorkTime = WORK_TIME;
+    userBreakTime = BREAK_TIME;
     useLongBreak = YES;
     tickSoundOn = YES;
     }

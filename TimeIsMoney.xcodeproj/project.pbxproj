@@ -19,7 +19,7 @@
 		A923D4231D5516AF0070A47F /* TimeIsMoneySettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */; };
 		A9563EF61D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */; };
 		A9563EFA1D760486006CFA40 /* tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9563EF91D760486006CFA40 /* tick.mp3 */; };
-		A9563EFC1D7604E1006CFA40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9563EFB1D7604E1006CFA40 /* AVFoundation.framework */; };
+		A9B534971D7DFC3A006BCF86 /* TimeIsMoneyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B534961D7DFC3A006BCF86 /* TimeIsMoneyConstants.m */; };
 		A9FDFB251D7A066D008391BF /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9FDFB241D7A066D008391BF /* alarm.mp3 */; };
 		A9FDFB7C1D7A099F008391BF /* build_docs.sh in Resources */ = {isa = PBXBuildFile; fileRef = A9FDFB281D7A099F008391BF /* build_docs.sh */; };
 		A9FDFB7D1D7A099F008391BF /* ObjectAL-Overview1.eps in Resources */ = {isa = PBXBuildFile; fileRef = A9FDFB2A1D7A099F008391BF /* ObjectAL-Overview1.eps */; };
@@ -102,6 +102,8 @@
 		A9563EF51D6D104D006CFA40 /* TimeIsMoneyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyTaskViewController.m; sourceTree = "<group>"; };
 		A9563EF91D760486006CFA40 /* tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tick.mp3; path = ../../../../../Desktop/tick.mp3; sourceTree = "<group>"; };
 		A9563EFB1D7604E1006CFA40 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A9B534951D7DFC3A006BCF86 /* TimeIsMoneyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeIsMoneyConstants.h; sourceTree = "<group>"; };
+		A9B534961D7DFC3A006BCF86 /* TimeIsMoneyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeIsMoneyConstants.m; sourceTree = "<group>"; };
 		A9FDFB241D7A066D008391BF /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm.mp3; path = "../../../../../Music/iTunes/iTunes Media/Music/Unknown Artist/Unknown Album/alarm.mp3"; sourceTree = "<group>"; };
 		A9FDFB281D7A099F008391BF /* build_docs.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_docs.sh; sourceTree = "<group>"; };
 		A9FDFB2A1D7A099F008391BF /* ObjectAL-Overview1.eps */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ObjectAL-Overview1.eps"; sourceTree = "<group>"; };
@@ -184,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9563EFC1D7604E1006CFA40 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +286,8 @@
 		A923D4291D56A0540070A47F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A9B534951D7DFC3A006BCF86 /* TimeIsMoneyConstants.h */,
+				A9B534961D7DFC3A006BCF86 /* TimeIsMoneyConstants.m */,
 				A923D4211D5516AF0070A47F /* TimeIsMoneySettingsModel.h */,
 				A923D4221D5516AF0070A47F /* TimeIsMoneySettingsModel.m */,
 			);
@@ -637,6 +640,7 @@
 				A9FDFB841D7A099F008391BF /* OALAction.m in Sources */,
 				A9FDFB921D7A099F008391BF /* ALListener.m in Sources */,
 				A9FDFB8D1D7A099F008391BF /* ALBuffer.m in Sources */,
+				A9B534971D7DFC3A006BCF86 /* TimeIsMoneyConstants.m in Sources */,
 				A9FDFB891D7A099F008391BF /* OALAudioTrackNotifications.m in Sources */,
 				A9FDFB911D7A099F008391BF /* ALDevice.m in Sources */,
 				A9FDFB861D7A099F008391BF /* OALAudioActions.m in Sources */,

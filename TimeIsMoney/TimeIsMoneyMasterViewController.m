@@ -6,20 +6,16 @@
 //  Copyright © 2016 Brian Lane. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
 #import "TimeIsMoneyMasterViewController.h"
 #import "AppDelegate.h"
 #import "OALSimpleAudio.h"
-
-
+#import "TimeIsMoneyConstants.h"
 
 @interface TimeIsMoneyMasterViewController ()
 
 @property (nonatomic) int remainingTicks;
 @property (nonatomic) int pauseTime;
 @property (nonatomic) int consecutiveSessionsCount;
-
-@property (nonatomic, strong) UIColor* pauseBackgroundColor;
 
 @property (nonatomic) TimerState previousState;
 @property (nonatomic) TimerState timerState;
@@ -37,7 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.pauseBackgroundColor = [UIColor colorWithRed:152/255.0 green:199/255.0 blue:255/255.0 alpha:1.0];
     [self setTimerState:STOPPED];
     self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
@@ -69,7 +64,6 @@
     self = [super init];
     if (self)   {
         self.timerState = STOPPED;
-        self.previousState = self.timerState;
         self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     }
     return self;
@@ -133,9 +127,11 @@
             break;
         case STOPPED:
         case PAUSED:
-            self.view.backgroundColor = [UIColor redColor];
-            [self.timeLabel setText:@"Break!"];
-            [self setTimerState:RUNNING_TASK];
+            if (self.previousState != RUNNING_BREAK) {
+                self.view.backgroundColor = [UIColor redColor];
+                [self.timeLabel setText:@"Break!"];
+                [self setTimerState:RUNNING_TASK];
+            }
             break;
         case RUNNING_BREAK:
             break;
@@ -153,7 +149,7 @@
     self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
-    self.view.backgroundColor = self.pauseBackgroundColor;
+    self.view.backgroundColor = [TimeIsMoneyConstants getPauseBackgroundColor];
 }
 
 - (void) pauseCountdownTimer
@@ -193,7 +189,7 @@
 #pragma mark - State functions
 -(void) setTimerState:(TimerState) newState
 {
-   if (_timerState) _previousState = _timerState;
+    _previousState = _timerState;
     _timerState = newState;
 }
 
@@ -213,7 +209,7 @@
                              [AppDelegate getAppDelegate].task = [NSString stringWithFormat:@"%@: %@", timeStamp, alert.textFields.firstObject.text];
                              [[AppDelegate getAppDelegate].completedTomatoes insertObject:[AppDelegate getAppDelegate].task atIndex:0];
 
-                             [[AppDelegate getAppDelegate] saveSettings:[AppDelegate getAppDelegate].completedTomatoes];
+                             [[AppDelegate getAppDelegate] saveTasks:[AppDelegate getAppDelegate].completedTomatoes];
 
                              [alert dismissViewControllerAnimated:YES completion:nil];
                              [self startCountdownTimer];
@@ -235,6 +231,8 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"What did you work on?"; 
     }];
+    
+    [alert.view setNeedsLayout];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -258,7 +256,7 @@
     [self.timeLabel setText:@"Break!"];
     [self promptUserForTaskEntry];
     [self setTimerState:RUNNING_BREAK];
-    self.view.backgroundColor = self.pauseBackgroundColor;
+    self.view.backgroundColor = [TimeIsMoneyConstants getPauseBackgroundColor];
 }
 
 -(void) transitionFromBreak
@@ -266,7 +264,7 @@
     self.remainingTicks = [AppDelegate getAppDelegate].settings.userWorkTime;
     [self updateLabel];
     [self setTimerState:STOPPED];
-    self.view.backgroundColor = self.pauseBackgroundColor;
+    self.view.backgroundColor = [TimeIsMoneyConstants getPauseBackgroundColor];
 
 }
 
