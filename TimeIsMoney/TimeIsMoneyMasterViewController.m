@@ -126,6 +126,9 @@
             [self setTimerState:RUNNING_BREAK];
             break;
         case STOPPED:
+            self.view.backgroundColor = [UIColor redColor];
+            [self.timeLabel setText:@"Break!"];
+            [self setTimerState:RUNNING_TASK];
         case PAUSED:
             if (self.previousState != RUNNING_BREAK) {
                 self.view.backgroundColor = [UIColor redColor];
